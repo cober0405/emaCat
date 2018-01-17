@@ -1,0 +1,25 @@
+#hospital .cats {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#hospital .cats img {
+  width: 40%;
+}
+#hospital .cats img.xin {
+  width: 10%;
+}
+#hospital .btn {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+#hospital .btn button {
+  border: none;
+  padding: 5px;
+  width: 20%;
+  background-color: red;
+  color: white;
+  border-radius: 5px;
+}
