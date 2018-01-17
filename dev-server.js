@@ -31,7 +31,7 @@ app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'))
 })
 
-var PORT = process.env.PORT || 9001
+var PORT = process.env.PORT || 9002
 app.listen(PORT, function() {
   console.log('Production Express server running at localhost:' + PORT)
 })

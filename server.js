@@ -2,6 +2,7 @@ var express = require('express')
 var path = require('path')
 var compression = require('compression');
 var proxy = require('proxy-middleware');
+var backApi = require("./process.json");
 
 var app = express();
 
@@ -12,6 +13,7 @@ app.use(express.static(path.join(__dirname, 'build')))
 
 // send all requests to index.html so browserHistory works
 app.use('/emaCat', proxy('http://192.168.21.36:8080'));
+app.use('/emaCat', proxy(backApi['production']["emaCat"]));
 app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'))
 })
