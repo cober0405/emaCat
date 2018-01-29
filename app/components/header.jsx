@@ -2,7 +2,7 @@ require("./header.css");
 import React from 'react';
 import {Link} from 'react-router';
 
-let Header = React.createClass({
+module.exports = React.createClass({
 	getInitialState: function () {
 		return {
 			imgUrls: [],
@@ -24,5 +24,4 @@ let Header = React.createClass({
 	}
 });
 
-module.exports = Header;
 

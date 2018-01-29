@@ -1,9 +1,18 @@
 
 .show{
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  img{
-    width: 50%;
+  position: absolute;
+  z-index: 1;
+  .cat{
+    width: 100%;
+    img{
+      width: 100%;
+    }
+    .shadow{
+      display: block;
+      position: absolute;
+      bottom: -3%;
+      width: 100%;
+      z-index: -1;
+    }
   }
 }

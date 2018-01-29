@@ -1,11 +1,15 @@
 require('./sale.css');
 import React from 'react';
-import Header from './header';
-import Show from './show';
-
+import Back from './back';
+import Res from './res';
+import Shelve from './shelve';
 let util = require('../util/util')
 
 module.exports = React.createClass({
+	getInitialState: function () {
+		return {
+		}
+	},
 	contextTypes: {
 		router: React.PropTypes.object
 	},
@@ -24,15 +28,32 @@ module.exports = React.createClass({
 		});
 	},
 	render: function () {
-		const title = '估价';
 		return (
 			<div id='sale'>
-				<Header title={title}/>
-				<Show/>
-				<form onSubmit={this.show}>
-					<p>售价：<input type='text'/></p>
-					<button type='submit'>上架</button>
-				</form>
+				<Back/>
+				<Res/>
+				<div className='list-content'>
+					<ul>
+						<Shelve from='sale'/>
+						<li className='price'>
+							<div>
+								<span>初始价格</span>
+								<input id='s_price' type='number' defaultValue='0'/>
+							</div>
+							<div>
+								<span>流拍价格</span>
+								<input type='number' defaultValue='0'/>
+							</div>
+							<div>
+								<span>拍卖时间</span>
+								<input type='number' defaultValue='0'/>
+							</div>
+						</li>
+					</ul>
+					<div className='btn'>
+						<img src={require('../images/sale1.png')}/>
+					</div>
+				</div>
 			</div>
 		);
 	}

@@ -1,7 +1,7 @@
 require('./hospital.css');
 import React from 'react';
-import Header from './header';
-import { Link } from 'react-router';
+import Back from './back';
+import Res from './res';
 
 module.exports = React.createClass({
 	contextTypes: {
@@ -11,16 +11,24 @@ module.exports = React.createClass({
 		// event.preventDefault();
 	},
 	render: function () {
-		const title = '医院';
 		return (
 			<div id='hospital'>
-				<Header title={title}/>
-				<div className='cats'>
-					<img src={require('../images/cat.png')}/>
-					<img className='xin' src={require('../images/xin.jpg')}/>
-					<img src={require('../images/cat1.png')}/>
+				<Back/>
+				<Res from={'1'}/>
+				<div className='list-content'>
+					<img className='f' src={require('../images/catty-m.png')}/>
+					<img className='x' src={require('../images/xin.png')}/>
+					<img className='m' src={require('../images/catty-f.png')}/>
+					<div className='icon-d'>
+						<img src={require('../images/icon-d.png')}/>
+					</div>
+					<div className='s'>
+						<img src={require('../images/catty-s.png')}/>
+					</div>
+					<div className='start'>
+						<img src={require('../images/start.png')}/>
+					</div>
 				</div>
-				<div className='btn'><button>来吧</button></div>
 			</div>
 		);
 	}

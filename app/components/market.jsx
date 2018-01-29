@@ -1,7 +1,8 @@
 require('./market.css');
 import React from 'react';
-import Header from './header';
+import Back from './back';
 import Shelve from './shelve';
+import Res from './res';
 
 let util = require('../util/util');
 
@@ -15,20 +16,30 @@ module.exports = React.createClass({
 		router: React.PropTypes.object
 	},
 	componentDidMount() {
-		util.reqPost('/emaCat/commodity/getCatDealList', data => {
-			this.setState({
-				list: data.catList
-			});
-		});
+		// util.reqPost('/emaCat/commodity/getCatDealList', data => {
+		// 	this.setState({
+		// 		list: data.catList
+		// 	});
+		// });
 	},
 	render: function () {
-		const title = '猫市';
 		return (
 			<div id='market'>
-				<Header title={title}/>
-				<ul>
-					{this.state.list.map(item => <Shelve item={item} from='market'/>)}
-				</ul>
+				<Back/>
+				<Res/>
+				<div className='list-content'>
+					<select className='sort'>
+						<option>按生育速度排列</option>
+					</select>
+					<ul>
+						{/*{this.state.list.map(item => <Shelve item={item} from='market'/>)}*/}
+						<Shelve/>
+						<Shelve/>
+						<Shelve/>
+						<Shelve/>
+						<Shelve/>
+					</ul>
+				</div>
 			</div>
 		);
 	}

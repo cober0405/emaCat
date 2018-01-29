@@ -1,6 +1,5 @@
 require('./login.css');
 import React from 'react';
-import Header from './header';
 
 let util = require('../util/util');
 
@@ -22,15 +21,13 @@ module.exports = React.createClass({
 			console.log(data);
 			data && data.uid && util.setCookie('uid', data.uid, {path: '/'});
 			util.delCookie('from');
-			const path = '/family';
+			const path = '/home';
 			this.context.router.push(path);
 		});
 	},
 	render: function () {
-		const title = '登录';
 		return (
 			<div>
-				<Header title={title}/>
 				<div id="login">
 					<p>用户名：<input id='userName' type='text'/></p>
 					<button onClick={this.login} className='btn'>登录</button>

@@ -1,5 +1,7 @@
 require('./shelve.css');
 import React from 'react';
+import Avatar from './avatar';
+import Sr from './sr';
 
 let util = require('../util/util')
 
@@ -19,85 +21,23 @@ module.exports = React.createClass({
 		const path = '/personal';
 		this.context.router.push(path);
 	},
-	buy(catId, orderId) {
-		console.log(catId, orderId);
-		let postData = {
-			uid: util.getCookie('uid'),
-			catId: catId,
-			orderId: orderId
-		};
-		util.reqPost('/emaCat/transcation/buyCat', postData, data => {
-			console.log(data);
-			const path = '/family';
-			this.context.router.push(path);
-			util.delCookie('from');
-		})
-	},
-	papa(type, catId, orderId) {
-		console.log(catId);
-		let mainCatId = util.getCookie('mainCat');
-		if (mainCatId == catId) {
-			alert('不要和自己交配');
-		} else {
-			let postData = {
-				uid: util.getCookie('uid'),
-				secondCatId: catId,
-				mainCatId: util.getCookie('mainCat')
-			};
-			if (type === 0) {
-				util.reqPost('/emaCat/breed/withSelfCat', postData, data => {
-					util.delCookie('mainCat');
-					util.delCookie('from');
-					console.log(data);
-					alert('繁殖成功!')
-					setTimeout(() => {
-						location.reload();
-					}, 3000)
-				})
-			} else if (type === 1) {
-				postData = {
-					uid: util.getCookie('uid'),
-					orderId: orderId,
-					mainCatId: util.getCookie('mainCat')
-				};
-				util.reqPost('/emaCat/breed/withLeaseCat', postData, data => {
-					console.log(data);
-					util.delCookie('mainCat');
-					util.delCookie('from');
-					alert('繁殖成功!');
-					const path = '/family';
-					this.context.router.push(path);
-				})
-			}
-		}
-
-	},
 	render: function () {
-		const {item} = this.props;
 		const {from} = this.props;
-		let {isPapa} = false;
-		if (util.getCookie('mainCat') && util.getCookie('from') === 'personal' && from !== 'market') {
-			isPapa = true;
-		}
 		return (
-			<li className='shelve'><img onClick={this.show} src={require('../images/cat.png')}/>
-				<div onClick={this.show.bind(this, item.catId, item.orderId, item.uid)} className='content'>
-					<div>id:{item.catId}</div>
-					<div>稀有度:{item.rarity}</div>
-					<div>gen:{item.gen}</div>
-					<div>基因序列:{item.gene}</div>
+			<li className='shelve'>
+				<div className='l'>
+					<div className='content'>
+						<Avatar/>
+					</div>
 				</div>
-				{from === 'brothel' && <div>
-					<div>价格：{item.price}</div>
-					<div className='buy' onClick={this.papa.bind(this, 1, item.catId, item.orderId)}>交配</div>
-				</div>}
-				{from === 'market' && <div>
-					<div>价格：{item.price}</div>
-					<div className='buy' onClick={this.buy.bind(this, item.catId, item.orderId)}>购买</div>
-				</div>}
-				{isPapa && <div>
-					<div className='buy' onClick={this.papa.bind(this, 0, item.catId)}>交配</div>
-				</div>}
+				<div className='detail'>
+					<div className='content'><span className='span1'>姓名</span><span className='span2'>小怂包</span></div>
+					<div className='content'><span className='span1'>世代</span><span className='span2'>12345</span></div>
+					<div className='content'><span className='span1'>生育速度</span><span className='span2'>100000</span></div>
+					{from !== 'sale' &&
+					<div className='content'><span className='text'>4,000,000</span><i className='icon icon3'/></div>}
+				</div>
+				<Sr/>
 			</li>
 		);
 	}

@@ -1,8 +1,17 @@
 .show {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
+  position: absolute;
+  z-index: 1;
 }
-.show img {
-  width: 50%;
+.show .cat {
+  width: 100%;
+}
+.show .cat img {
+  width: 100%;
+}
+.show .cat .shadow {
+  display: block;
+  position: absolute;
+  bottom: -3%;
+  width: 100%;
+  z-index: -1;
 }

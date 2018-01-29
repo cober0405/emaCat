@@ -1,20 +1,25 @@
 require('./family.css');
 import React from 'react';
-import Header from './header';
-import Shelve from './shelve';
+import Back from './back';
+import Show from './show';
+import Res from './res';
+import Interaction from './interaction';
+import Status from './status';
+import List from './list';
+import Cattr from './cattr';
 
 let util = require('../util/util');
 
 module.exports = React.createClass({
 	getInitialState: function () {
 		return {
-			list: []
+			showFlag: false
 		}
 	},
 	contextTypes: {
 		router: React.PropTypes.object
 	},
-	getList(){
+	getList() {
 		let uid = util.getCookie('uid');
 		const postData = {
 			uid: uid
@@ -29,14 +34,24 @@ module.exports = React.createClass({
 	componentDidMount() {
 		this.getList();
 	},
+	changeShowFlag() {
+		this.setState({
+			showFlag: !this.state.showFlag
+		});
+	},
 	render() {
-		const title = '猫宅';
+		const showFlag = this.state.showFlag;
 		return (
 			<div id='family'>
-				<Header title={title}/>
-				<ul>
-					{this.state.list.map(item => <Shelve item={item} from='family'/>)}
-				</ul>
+				<Back/>
+				<Res from='1'/>
+				<Interaction/>
+				<div onClick={this.changeShowFlag}>
+					<Show/>
+				</div>
+				<Status/>
+				<List/>
+				{showFlag && <Cattr handleShow={this.changeShowFlag.bind(this)}/>}
 			</div>
 		);
 	}
