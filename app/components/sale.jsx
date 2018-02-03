@@ -13,8 +13,8 @@ module.exports = React.createClass({
 	contextTypes: {
 		router: React.PropTypes.object
 	},
-	show: function (event) {
-		const price = event.target.elements[0].value;
+	sale() {
+		const price = document.getElementById('s_price').value;
 		let postData = {
 			uid: util.getCookie('uid'),
 			upDays: 1,
@@ -28,13 +28,16 @@ module.exports = React.createClass({
 		});
 	},
 	render: function () {
+		const item = {
+			catId:util.getCookie('catId')
+		};
 		return (
 			<div id='sale'>
-				<Back/>
+				<Back to='/family'/>
 				<Res/>
 				<div className='list-content'>
 					<ul>
-						<Shelve from='sale'/>
+						<Shelve from='sale' item={item}/>
 						<li className='price'>
 							<div>
 								<span>初始价格</span>
@@ -50,7 +53,7 @@ module.exports = React.createClass({
 							</div>
 						</li>
 					</ul>
-					<div className='btn'>
+					<div className='btn' onClick={this.sale}>
 						<img src={require('../images/sale1.png')}/>
 					</div>
 				</div>

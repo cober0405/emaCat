@@ -16,11 +16,11 @@ module.exports = React.createClass({
 		router: React.PropTypes.object
 	},
 	componentDidMount() {
-		// util.reqPost('/emaCat/commodity/getCatDealList', data => {
-		// 	this.setState({
-		// 		list: data.catList
-		// 	});
-		// });
+		util.reqPost('/emaCat/commodity/getCatDealList', data => {
+			this.setState({
+				list: data.catList
+			});
+		});
 	},
 	render: function () {
 		return (
@@ -32,12 +32,7 @@ module.exports = React.createClass({
 						<option>按生育速度排列</option>
 					</select>
 					<ul>
-						{/*{this.state.list.map(item => <Shelve item={item} from='market'/>)}*/}
-						<Shelve/>
-						<Shelve/>
-						<Shelve/>
-						<Shelve/>
-						<Shelve/>
+						{this.state.list.map(item => <Shelve item={item} from='market'/>)}
 					</ul>
 				</div>
 			</div>

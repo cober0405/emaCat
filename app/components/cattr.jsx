@@ -11,10 +11,11 @@ module.exports = React.createClass({
 		this.props.handleShow();
 	},
 	render() {
+		const {item} = this.props;
 		return (
 			<div id='cattr'>
 				<div className='content'>
-					<Info/>
+					<Info item={item}/>
 					<Gen/>
 				</div>
 				<i className='close' onClick={this.close}/>

@@ -1,8 +1,10 @@
-require('./brothel.css');
+require('./market.css');
 import React from 'react';
-import Header from './header';
+import Back from './back';
 import Shelve from './shelve';
-let util = require('../util/util')
+import Res from './res';
+
+let util = require('../util/util');
 
 module.exports = React.createClass({
 	getInitialState: function () {
@@ -13,11 +15,6 @@ module.exports = React.createClass({
 	contextTypes: {
 		router: React.PropTypes.object
 	},
-	show: function () {
-		// event.preventDefault();
-		const path = '/personal';
-		this.context.router.push(path);
-	},
 	componentDidMount() {
 		util.reqPost('/emaCat/commodity/getCatLeaseList', data => {
 			this.setState({
@@ -26,13 +23,18 @@ module.exports = React.createClass({
 		});
 	},
 	render: function () {
-		const title = '卖身所';
 		return (
-			<div id='brothel'>
-				<Header title={title}/>
-				<ul>
-					{this.state.list.map(item => <Shelve item={item} from='brothel'/>)}
-				</ul>
+			<div id='market'>
+				<Back/>
+				<Res/>
+				<div className='list-content'>
+					<select className='sort'>
+						<option>按生育速度排列</option>
+					</select>
+					<ul>
+						{this.state.list.map(item => <Shelve item={item} from='market'/>)}
+					</ul>
+				</div>
 			</div>
 		);
 	}

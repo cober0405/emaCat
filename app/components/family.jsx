@@ -13,7 +13,9 @@ let util = require('../util/util');
 module.exports = React.createClass({
 	getInitialState: function () {
 		return {
-			showFlag: false
+			showFlag: false,
+			catList: [],
+			showF: false,
 		}
 	},
 	contextTypes: {
@@ -27,8 +29,14 @@ module.exports = React.createClass({
 		util.reqPost('/emaCat/currency/getUserCatList', postData, data => {
 			console.log(data);
 			this.setState({
-				list: data.catList
+				catList: data.catList
 			});
+			if (data.catList.length > 0) {
+				this.setState({
+					showF: true
+				});
+			}
+			util.setCookie('catId', data.catList[util.getCookie('catIndex') || 0].catId);
 		});
 	},
 	componentDidMount() {
@@ -45,13 +53,17 @@ module.exports = React.createClass({
 			<div id='family'>
 				<Back/>
 				<Res from='1'/>
-				<Interaction/>
-				<div onClick={this.changeShowFlag}>
+				{this.state.showF && <Interaction/>}
+
+				{this.state.showF && <div onClick={this.changeShowFlag}>
 					<Show/>
-				</div>
-				<Status/>
-				<List/>
-				{showFlag && <Cattr handleShow={this.changeShowFlag.bind(this)}/>}
+				</div>}
+
+				{this.state.showF && <Status/>}
+
+				<List catList={this.state.catList}/>
+				{showFlag &&
+				<Cattr handleShow={this.changeShowFlag.bind(this)} item={this.state.catList[util.getCookie('catIndex') || 0]}/>}
 			</div>
 		);
 	}

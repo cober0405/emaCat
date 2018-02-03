@@ -9,32 +9,37 @@ let util = require('../util/util');
 module.exports = React.createClass({
 	getInitialState: function () {
 		return {
-			list: []
+			list: [],
+			showF: false
 		}
 	},
 	contextTypes: {
 		router: React.PropTypes.object
 	},
-	getList(){
+	getList() {
 		let uid = util.getCookie('uid');
 		const postData = {
 			uid: uid
 		};
 		util.reqPost('/emaCat/currency/getUserCatList', postData, data => {
 			console.log(data);
-			this.setState({
-				list: data.catList
-			});
+			if (data.catList.length > 0) {
+				this.setState({
+					showF: true
+				});
+			}
 		});
 	},
 	componentDidMount() {
 		this.getList();
+		util.delCookie('from');
 	},
 	render() {
 		return (
 			<div id='home' className='full'>
 				<Res from='1'/>
-				<Show/>
+				{this.state.showF && <Show/>}
+
 				<Footer/>
 			</div>
 		);

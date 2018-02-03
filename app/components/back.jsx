@@ -4,15 +4,15 @@ import {Link} from 'react-router';
 
 module.exports = React.createClass({
 	getInitialState: function () {
-		return {
-		}
+		return {}
 	},
 	contextTypes: {
 		router: React.PropTypes.object
 	},
 	render: function () {
+		const to = this.props.to || '/home';
 		return (
-			<Link to='/home' id='back'>
+			<Link to={to} id='back'>
 				<img src={require('../images/back.png')}/>
 			</Link>
 		);
